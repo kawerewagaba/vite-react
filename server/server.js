@@ -38,6 +38,8 @@ app.put('/tasks/:id', (req, res) => {
     tasks = tasks.filter(task => task.id !== taskId)
     tasks.push(newTask)
 
+    // use a 200 instead of a 201 - both indicate content is returned in the response
+    // however a 201 indicates a new resource was created, which is not the case with a PUT
     res.status(200).json(newTask)
 })
 
@@ -46,6 +48,8 @@ app.delete('/tasks/:id', (req, res) => {
 
     tasks = tasks.filter(task => task.id !== taskId)
 
+    // instead of a 204 (not returning content aka the new list) - and fetching the new list in a separate network request
+    // use a 200 (return the new list) and update the client
     res.status(200).json(tasks)
 })
 

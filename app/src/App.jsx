@@ -12,6 +12,12 @@ function App() {
       .then(data => setTasks(data))
   }, [])
 
+  // next we are getting a single task from the api
+  // have a link to click
+  // navigate to a page with that task
+  // do the same in case of hotlinking - user types url in browser, or navigates to a shared link
+  // that task page can have task specific stuff
+
   const addTask = () => {
     fetch('http://localhost:3001/tasks', {
       method: 'POST',

@@ -32,6 +32,8 @@ function App() {
   }
 
   const editTask = (id) => {
+    // TODO: edit the item in place, so that the task order does not change
+    // currently it is taken to the end of the list
     fetch(`http://localhost:3001/tasks/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },

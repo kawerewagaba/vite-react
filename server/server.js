@@ -32,6 +32,8 @@ app.post('/tasks', (req, res) => {
 })
 
 app.put('/tasks/:id', (req, res) => {
+    // TODO: edit the item in place, so that the task order does not change
+    // currently it is taken to the end of the list
     const taskId = parseInt(req.params.id)
     const newTask = { id: taskId, text: req.body.text }
 

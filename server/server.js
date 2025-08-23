@@ -42,7 +42,11 @@ app.put('/tasks/:id', (req, res) => {
 
     // use a 200 instead of a 201 - both indicate content is returned in the response
     // however a 201 indicates a new resource was created, which is not the case with a PUT
-    res.status(200).json(newTask)
+
+    // return the new list, not just the updated task to avoid the client redoing the logic above - saving client resources
+    // in this case it works since we display the entire list on the client side
+    // in other cases, where the edited item is not part of a list, simply return the item edited, like it has been
+    res.status(200).json(tasks)
 })
 
 app.delete('/tasks/:id', (req, res) => {

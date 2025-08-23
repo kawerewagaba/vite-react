@@ -24,6 +24,8 @@ app.get('/tasks/:id', (req, res) => {
 })
 
 app.post('/tasks', (req, res) => {
+    // for the id we may have to consider UUID
+    // do not confuse the task id with its index in the array
     const task = { id: id++, text: req.body.text }
 
     tasks.push(task)
@@ -32,20 +34,16 @@ app.post('/tasks', (req, res) => {
 })
 
 app.put('/tasks/:id', (req, res) => {
-    // TODO: edit the item in place, so that the task order does not change
-    // currently it is taken to the end of the list
     const taskId = parseInt(req.params.id)
     const newTask = { id: taskId, text: req.body.text }
 
-    tasks = tasks.filter(task => task.id !== taskId)
-    tasks.push(newTask)
+    // find the task, get its index, replace
+    const taskIndex = tasks.findIndex(task => task.id === taskId)
+    
+    tasks[taskIndex] = newTask
 
-    // use a 200 instead of a 201 - both indicate content is returned in the response
-    // however a 201 indicates a new resource was created, which is not the case with a PUT
+    // TODO: handle edge cases - e.g when id does not exist - i.e index is -1
 
-    // return the new list, not just the updated task to avoid the client redoing the logic above - saving client resources
-    // in this case it works since we display the entire list on the client side
-    // in other cases, where the edited item is not part of a list, simply return the item edited, like it has been
     res.status(200).json(tasks)
 })
 
@@ -53,9 +51,6 @@ app.delete('/tasks/:id', (req, res) => {
     const taskId = parseInt(req.params.id)
 
     tasks = tasks.filter(task => task.id !== taskId)
-
-    // instead of a 204 (not returning content aka the new list) - and fetching the new list in a separate network request
-    // use a 200 (return the new list) and update the client
     res.status(200).json(tasks)
 })
 

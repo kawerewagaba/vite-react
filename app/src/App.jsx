@@ -72,6 +72,7 @@ function App() {
               {
                 edit.mode ?
                 <button onClick={() => {
+                  // TODO: mode should change for only this item, not all, as it is currently
                   setEdit({ mode: false, taskId: null })
                   setInput('')
                 }}>
@@ -79,6 +80,7 @@ function App() {
                 </button>
                 :
                 <button onClick={() => {
+                  // TODO: mode should change for only this item, not all, as it is currently
                   setEdit({ mode: true, taskId: task.id })
                   setInput(task.text)
                 }}>

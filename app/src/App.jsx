@@ -59,9 +59,9 @@ function App() {
         <input type='text' value={input} onChange={e => setInput(e.target.value)} />
         {
           edit.mode ?
-          <button onClick={() => editTask(edit.taskId)}>edit task</button>
+          <button onClick={() => editTask(edit.taskId)}>Apply</button>
           :
-          <button onClick={addTask}>add task</button> 
+          <button onClick={addTask}>Add</button> 
         }
       </div>
       <div>
@@ -76,7 +76,7 @@ function App() {
                   setEdit({ mode: false, taskId: null })
                   setInput('')
                 }}>
-                  cancel
+                  Cancel
                 </button>
                 :
                 <button onClick={() => {
@@ -84,10 +84,10 @@ function App() {
                   setEdit({ mode: true, taskId: task.id })
                   setInput(task.text)
                 }}>
-                  edit task
+                  Edit
                 </button>
               }
-              <button onClick={() => deleteTask(task.id)}>delete task</button>
+              <button onClick={() => deleteTask(task.id)}>Delete</button>
             </div>
           ))
         }
